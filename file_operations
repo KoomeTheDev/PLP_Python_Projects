@@ -1,0 +1,32 @@
+# File Read & Write Challenge + Error Handling Lab
+
+def modify_content(content):
+   
+    return content.upper()
+
+# Step 1: Ask the user for the file name to read
+input_filename = input("Enter the name of the file to read: ")
+
+try:
+    # Step 2: Try to open and read the file
+    with open(input_filename, 'r', encoding='utf-8') as infile:
+        original_content = infile.read()
+
+    # Step 3: Modify the file content
+    modified_content = modify_content(original_content)
+
+    # Step 4: Ask user for new file name to write the modified content
+    output_filename = input("Enter the name for the new file: ")
+
+    # Step 5: Write the modified content to the new file
+    with open(output_filename, 'w', encoding='utf-8') as outfile:
+        outfile.write(modified_content)
+
+    print(f"File successfully modified and saved as '{output_filename}'.")
+
+except FileNotFoundError:
+    print("Error: The file you entered does not exist.")
+except PermissionError:
+    print("Error: Permission denied. Cannot read or write the file.")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
